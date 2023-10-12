@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <section class="home-section">
+        <div class="home-content">
+            
+            <div class="options-container">
+                <div class="container-divider"></div> <!-- Divider Line -->
+                <h3 class="container-title">Choose an Option:</h3>
+                
+                <div class="options-row">
+                    <a href="{% url 'calculator' %}" class="cta-button">Calculate Angle (Planes)</a>
+                    <a href="{% url 'calculator11' %}" class="cta-button">Calculate Angle (Straightline)</a>
+                </div>
+                
+                <div class="options-row">
+                    <a href="{% url 'equation_generator' %}" class="cta-button">Equation Generation</a>
+                    <a href="{% url 'proof_of_coordinate' %}" class="cta-button">Proof of Coordinate</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

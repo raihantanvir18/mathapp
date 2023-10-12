@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+
+    <div class="container">
+        <h2 class="calculator-title">Angle Between Two Planes</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.equation1.id_for_label }}">Equation 1:ax+by+cz=d</label>
+                {{ form.equation1 }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.equation2.id_for_label }}">Equation 2:ax+by+cz=d</label>
+                {{ form.equation2 }}
+            </div>
+            <button type="submit" class="calculate-button">Calculate Angle</button>
+        </form>
+    </div>
+{% endblock %}

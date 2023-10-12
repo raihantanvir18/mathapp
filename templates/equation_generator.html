@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+   
+
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+
+    <div class="container">
+        <h2 class="calculator-title">Plane Equation Generator</h2>
+        
+        <form id="equationForm">
+            <h4>Equation No 1:(x-a1)/A=(y-b1)/B=(z-c1)/C</h4>
+            <h4>Enter the value of denominator</h4>
+            <div class="form-group">
+                <label for="a1">A:</label>
+                <input type="number" id="a1" step="any" required>
+                <label for="b1">B:</label>
+                <input type="number" id="b1" step="any" required>
+                <label for="c1">C:</label>
+                <input type="number" id="c1" step="any" required>
+            </div>
+            <h4>Enter coefficients for Equation 1</h4>
+            <div class="form-group">
+                <label for="a2">a1:</label>
+                <input type="number" id="a2" step="any" required>
+                <label for="b2">b1:</label>
+                <input type="number" id="b2" step="any" required>
+                <label for="c2">c1:</label>
+                <input type="number" id="c2" step="any" required>
+            </div>
+
+            <h4>Equation No 2:ax+by+cz+d=0</h4>
+            <h4>Enter coefficients for Equation 2</h4>
+
+            <div class="form-group">
+                <label for="a3">a:</label>
+                <input type="number" id="a3" step="any" required>
+                <label for="b3">b:</label>
+                <input type="number" id="b3" step="any" required>
+                <label for="c3">c:</label>
+                <input type="number" id="c3" step="any" required>
+            </div>
+
+            <button type="button" class="calculate-button" onclick="generateEquation()">Generate Plane Equation</button>
+        </form>
+
+        <h3>Resulting Plane Equation:</h3>
+        <p id="planeEquation"></p>
+    </div>
+
+    <script>
+        function generateEquation() {
+            // Your JavaScript code here
+            const eq1 = new Array(3).fill(0);
+            const a = parseFloat(document.getElementById("a1").value);
+            const b = parseFloat(document.getElementById("b1").value);
+            const c = parseFloat(document.getElementById("c1").value);
+            eq1[0] = a;
+            eq1[1] = b;
+            eq1[2] = c;
+
+            const eq2 = new Array(3).fill(0);
+            const a1 = parseFloat(document.getElementById("a2").value);
+            const b1 = parseFloat(document.getElementById("b2").value);
+            const c1 = parseFloat(document.getElementById("c2").value);
+            eq2[0] = a1;
+            eq2[1] = b1;
+            eq2[2] = c1;
+
+            const eq3 = new Array(3).fill(0);
+            const a2 = parseFloat(document.getElementById("a3").value);
+            const b2 = parseFloat(document.getElementById("b3").value);
+            const c2 = parseFloat(document.getElementById("c3").value);
+            eq3[0] = a2;
+            eq3[1] = b2;
+            eq3[2] = c2;
+
+            const normal = [
+                eq2[1] * eq3[2] - eq2[2] * eq3[1],
+                eq2[2] * eq3[0] - eq2[0] * eq3[2],
+                eq2[0] * eq3[1] - eq2[1] * eq3[0]
+            ];
+
+            let constant = 0;
+            for (let i = 0; i < 3; i++) {
+                constant += normal[i] * eq1[i];
+            }
+            constant = -constant;
+
+            let equation = `${normal[0]}x`;
+            if (normal[1] < 0) {
+                equation += `${normal[1]}y`;
+            } else if (normal[1] > 0) {
+                equation += `+${normal[1]}y`;
+            }
+            if (normal[2] < 0) {
+                equation += `${normal[2]}z`;
+            } else if (normal[2] > 0) {
+                equation += `+${normal[2]}z`;
+            }
+            if (constant < 0) {
+                equation += `${constant}z`;
+            } else if (constant > 0) {
+                equation += `+${constant}`;
+            }
+            equation += '=0';
+
+            // Display the resulting plane equation
+            document.getElementById("planeEquation").textContent = equation;
+        }
+    </script>
+
+{% endblock %}

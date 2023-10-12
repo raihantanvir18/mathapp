@@ -1,0 +1,9 @@
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+    <div class="container">
+        <h2 class="calculator-title">Angle Between Planes Calculator</h2>
+        <p class="result-text">The angle between the two planes is: {{ result }} degrees</p>
+    </div>
+{% endblock %}

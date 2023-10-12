@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+    <div class="container">
+        <h2 class="calculator-title">Proof of Co-ordinate</h2>
+
+        <!-- Form for entering point coordinates -->
+        <form>
+            <label for="point1X">Point 1:</label>
+            <input type="number" id="point1X" placeholder="X-coordinate">
+            <input type="number" id="point1Y" placeholder="Y-coordinate">
+            <input type="number" id="point1Z" placeholder="Z-coordinate"><br><br>
+
+            <label for="point2X">Point 2:</label>
+            <input type="number" id="point2X" placeholder="X-coordinate">
+            <input type="number" id="point2Y" placeholder="Y-coordinate">
+            <input type="number" id="point2Z" placeholder="Z-coordinate"><br><br>
+
+            <label for="point3X">Point 3:</label>
+            <input type="number" id="point3X" placeholder="X-coordinate">
+            <input type="number" id="point3Y" placeholder="Y-coordinate">
+            <input type="number" id="point3Z" placeholder="Z-coordinate"><br><br>
+
+            <label for="point4X">Point 4:</label>
+            <input type="number" id="point4X" placeholder="X-coordinate">
+            <input type="number" id="point4Y" placeholder="Y-coordinate">
+            <input type="number" id="point4Z" placeholder="Z-coordinate"><br><br>
+
+            <button type="button" onclick="checkPointsOnPlane()">Check Points</button>
+        </form>
+
+        <!-- Result text area -->
+        <p id="proof-result-text"></p>
+
+        <script>
+            // JavaScript code to check if points lie on a plane
+            function checkPointsOnPlane() {
+                var point1X = parseFloat(document.getElementById("point1X").value);
+                var point1Y = parseFloat(document.getElementById("point1Y").value);
+                var point1Z = parseFloat(document.getElementById("point1Z").value);
+
+                var point2X = parseFloat(document.getElementById("point2X").value);
+                var point2Y = parseFloat(document.getElementById("point2Y").value);
+                var point2Z = parseFloat(document.getElementById("point2Z").value);
+
+                var point3X = parseFloat(document.getElementById("point3X").value);
+                var point3Y = parseFloat(document.getElementById("point3Y").value);
+                var point3Z = parseFloat(document.getElementById("point3Z").value);
+
+                var point4X = parseFloat(document.getElementById("point4X").value);
+                var point4Y = parseFloat(document.getElementById("point4Y").value);
+                var point4Z = parseFloat(document.getElementById("point4Z").value);
+
+                var eq1 = [point1X, point1Y, point1Z];
+                var eq2 = [point2X - point1X, point2Y - point1Y, point2Z - point1Z];
+                var eq3 = [point3X - point1X, point3Y - point1Y, point3Z - point1Z];
+                var eq4 = [point4X, point4Y, point4Z];
+
+                var eq5 = crossProduct(eq2, eq3);
+                var eq6 = dotProduct(eq4, eq5);
+
+                var pointsOnPlane = eq6 === 0;
+
+                // Update the result text based on the points' positions
+                var resultText = document.getElementById("proof-result-text");
+                if (pointsOnPlane) {
+                    resultText.innerText = "The points are lying on a plane.";
+                } else {
+                    resultText.innerText = "The points are not lying on a plane.";
+                }
+            }
+
+            // Define a function to calculate the dot product of two vectors
+            function dotProduct(vec1, vec2) {
+                return vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2];
+            }
+
+            // Define a function to calculate the cross product of two vectors
+            function crossProduct(vec1, vec2) {
+                var result = [
+                    vec1[1] * vec2[2] - vec1[2] * vec2[1],
+                    vec1[2] * vec2[0] - vec1[0] * vec2[2],
+                    vec1[0] * vec2[1] - vec1[1] * vec2[0]
+                ];
+                return result;
+            }
+        </script>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+/* Navbar styling */
+.navbar {
+    background-color: #ffffff; /* Light background color */
+    color: #4c66f9; /* Text color */
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Navbar links */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #887f7f; /* Text color */
+    transition: background-color 0.3s; /* Smooth color transition */
+    border-bottom: 2px solid transparent; /* Add a bottom border for a premium look */
+}
+
+.navbar a:hover {
+    background-color: #f7f7f7; /* Lighter background on hover */
+    border-bottom: 2px solid #4c66f9; /* Highlight bottom border on hover */
+}
+
+/* Navbar brand */
+.navbar .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4c66f9; /* Brand text color */
+}
+
+/* Navbar toggler (for mobile) */
+.navbar .navbar-toggler {
+    display: none;
+    background-color: transparent; /* Transparent background color */
+    border: none; /* No border */
+    color: #4c66f9; /* Text color */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Add responsive styles */
+@media screen and (max-width: 600px) {
+    .navbar a:not(:first-child) {
+        display: none;
+    }
+    .navbar .navbar-toggler {
+        float: right;
+        display: block;
+    }
+}
